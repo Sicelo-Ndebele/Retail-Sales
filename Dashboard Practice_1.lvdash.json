@@ -26,7 +26,7 @@
   "pages": [
     {
       "name": "d9f7de1b",
-      "displayName": "Untitled Page",
+      "displayName": "Date Functions dashboard",
       "layout": [
         {
           "widget": {
@@ -189,9 +189,9 @@
                 "layout": "stack"
               },
               "frame": {
-                "title": "Visualization 3",
                 "showTitle": true,
-                "headerAlignment": "center"
+                "headerAlignment": "center",
+                "title": "Revenue by Category"
               },
               "widgetType": "pie",
               "encodings": {
@@ -222,7 +222,7 @@
         },
         {
           "widget": {
-            "name": "bb85927c",
+            "name": "c5",
             "queries": [
               {
                 "name": "main_query",
@@ -230,12 +230,12 @@
                   "datasetName": "4858ab70",
                   "fields": [
                     {
-                      "name": "trans_day",
-                      "expression": "`trans_day`"
+                      "name": "monthly(Date)",
+                      "expression": "DATE_TRUNC(\"MONTH\", `Date`)"
                     },
                     {
-                      "name": "unique_customers",
-                      "expression": "`unique_customers`"
+                      "name": "sum(unique_customers)",
+                      "expression": "SUM(`unique_customers`)"
                     },
                     {
                       "name": "count(*)",
@@ -247,31 +247,36 @@
               }
             ],
             "spec": {
-              "version": 1,
+              "version": 3,
               "frame": {
-                "title": "Visualization 3",
                 "showTitle": true,
-                "showDescription": true,
-                "headerAlignment": "center"
+                "showDescription": false,
+                "headerAlignment": "center",
+                "title": "Customer forcast"
               },
-              "widgetType": "forecast-line",
+              "widgetType": "line",
               "encodings": {
                 "x": {
-                  "fieldName": "trans_day",
+                  "fieldName": "monthly(Date)",
                   "scale": {
-                    "type": "categorical"
+                    "type": "temporal"
                   }
                 },
                 "y": {
-                  "original": {
-                    "fieldName": "unique_customers"
-                  },
+                  "fields": [
+                    {
+                      "fieldName": "sum(unique_customers)"
+                    },
+                    {
+                      "fieldName": "count(*)"
+                    }
+                  ],
                   "scale": {
                     "type": "quantitative"
-                  },
-                  "prediction": {
-                    "fieldName": "count(*)"
                   }
+                },
+                "label": {
+                  "show": true
                 }
               }
             }
