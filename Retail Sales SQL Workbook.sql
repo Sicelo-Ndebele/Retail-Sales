@@ -1,3 +1,4 @@
 -- Databricks notebook source
-select *
-from retail.sales.dataset
+-- MAGIC %SQL
+-- MAGIC SELECT*
+-- MAGIC FROM retail.sales.dataset
